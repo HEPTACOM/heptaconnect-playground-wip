@@ -8,10 +8,7 @@ This project is intended to showcase HEPTAconnect and to help you evaluate it fo
 ## Installation
 
 ```shell
-composer create-project heptaconnect/playground;
-cd playground;
-bin/console system:setup;
-bin/console system:install;
+composer create-project heptaconnect/playground
 ```
 
 Configure the document root directory (`/public`) to be hosted by a webserver under a dedicated hostname.

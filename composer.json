@@ -28,6 +28,10 @@
             "[ ! -f vendor/autoload.php ] || \"$PHP_BINARY\" bin/console cache:clear",
             "[ ! -f vendor/autoload.php ] || \"$PHP_BINARY\" bin/console system:update:finish"
         ],
+        "post-create-project-cmd": [
+            "\"$PHP_BINARY\" bin/console system:setup",
+            "\"$PHP_BINARY\" bin/console system:install"
+        ],
         "cs:lint": "pint --test",
         "cs:fix": "pint"
     },
