@@ -20,6 +20,13 @@
             <argument type="tagged_iterator" tag="heptaconnect.portal_extension"/>
         </service>
 
+        <service id="HeptaConnect\Production\Integration\Core\Web\HttpHostProviderDecorator"
+                 decorates="Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Web\Http\HttpHostProviderContract"
+                 parent="Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Web\Http\HttpHostProviderContract">
+            <argument type="service" id=".inner"/>
+            <argument type="string">%env(string:APP_URL)%</argument>
+        </service>
+
         <service id="HeptaConnect\Production\Integration\Controller\HomeController">
             <argument type="string">%kernel.heptaconnect_version%</argument>
         </service>

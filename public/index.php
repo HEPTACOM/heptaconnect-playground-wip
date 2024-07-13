@@ -28,6 +28,10 @@ return function (array $context) use ($classLoader, $projectRoot): HttpKernelInt
     $appEnv = $context['APP_ENV'] ?? 'prod';
     $debug = (bool) ($context['APP_DEBUG'] ?? ($appEnv !== 'prod'));
 
+    $appUrl = (($context['HTTPS'] ?? null) === 'on' ? 'https' : 'http') . '://' . $context['SERVER_NAME'];
+    $_SERVER['APP_URL'] = $_ENV['APP_URL'] = $appUrl;
+    \putenv(\sprintf('APP_URL="%s"', $appUrl));
+
     $httpKernel = new HttpKernel($appEnv, $debug, $classLoader);
     $httpKernel->setPluginLoader(getPluginLoader($projectRoot, $classLoader));
 
