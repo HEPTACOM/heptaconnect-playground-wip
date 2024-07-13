@@ -51,6 +51,7 @@
         "heptacom/heptaconnect-portal-base": "^0.9",
         "heptacom/heptaconnect-storage-base": "^0.9",
         "heptacom/heptaconnect-storage-shopware-dal": "^0.9",
+        "psy/psysh": "^0.12.4",
         "symfony/framework-bundle": "^5.4",
         "symfony/runtime": "^6.4"
     },
