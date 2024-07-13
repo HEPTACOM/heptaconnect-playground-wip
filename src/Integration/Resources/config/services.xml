@@ -3,11 +3,25 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults autowire="true" autoconfigure="true"/>
+
+        <prototype namespace="HeptaConnect\Production\Integration\Controller\" resource="../../Controller/**"/>
+
+        <instanceof id="Symfony\Bundle\FrameworkBundle\Controller\AbstractController">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </instanceof>
+
         <service id="HeptaConnect\Production\Integration\Core\Portal\ComposerPortalLoader"
                  decorates="Heptacom\HeptaConnect\Core\Portal\ComposerPortalLoader">
             <argument type="service" id="HeptaConnect\Production\Integration\Core\Portal\ComposerPortalLoader.inner"/>
             <argument type="tagged_iterator" tag="heptaconnect.portal"/>
             <argument type="tagged_iterator" tag="heptaconnect.portal_extension"/>
+        </service>
+
+        <service id="HeptaConnect\Production\Integration\Controller\HomeController">
+            <argument type="string">%kernel.heptaconnect_version%</argument>
         </service>
     </services>
 </container>
