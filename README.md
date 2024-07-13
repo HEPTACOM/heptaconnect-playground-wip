@@ -1,6 +1,6 @@
 # HEPTAconnect
 
-> Repository template for production integration
+> Playground repository for evaluation purposes
 
 This repository is intended to be forked and modified to your individual use case.
 It provides a quickstart for projects aiming for a standalone application based on HEPTAconnect.
