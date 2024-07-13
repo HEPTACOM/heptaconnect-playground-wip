@@ -1,0 +1,82 @@
+{% extends '@WebFrontendPackage/ui/_base/layout.html.twig' %}
+{# @var page \HeptaConnect\Production\Portal\PlaygroundDumperPortal\Ui\ProductDetail\ProductDetailPage #}
+
+{% block head_title %}Products | {{ parent() }}{% endblock %}
+
+{% block head_resources %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css">
+
+    <style type="text/css">
+        .bg-gradient-custom {
+            background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,144,251,1) 100.3% );
+        }
+    </style>
+{% endblock %}
+
+{% block footer_scripts %}
+    <script nonce="{{ nonce }}"
+            src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+    <script nonce="{{ nonce }}">
+        (function (hljs) {
+            'use strict';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                Array.prototype.forEach.call(
+                    document.querySelectorAll('pre code:not(.hljs)'),
+                    el => hljs.highlightElement(el)
+                );
+            });
+        })(hljs);
+    </script>
+{% endblock %}
+
+{% block top_bar %}{% endblock %}
+
+{% block layout %}
+    <main class="col p-0 h-100 overflow-scroll d-flex flex-column">
+        {{ block('main') }}
+    </main>
+{% endblock %}
+
+{% block content %}
+    {% set product = page.product %}
+    {% set image = product.images[0] %}
+
+    <a class="btn btn-primary" href="{{ path('products/list') }}">
+        <i class="bi bi-arrow-left-circle-fill"></i>
+        Back to list
+    </a>
+
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 mb-4">
+            <h2>Product: {{ product.name }}</h2>
+
+            <div class="card position-relative" style="max-width: 320px;">
+                <img src="{{ image.publicUrl }}"
+                     alt="{{ image.filename }}"
+                     class="card-img-top flex-grow-1 p-2 object-fit-contain bg-gradient-custom">
+
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ product.price|format_currency('EUR') }}
+                </span>
+
+                <div class="card-footer bg-body border-0">
+                    <h5 class="card-title">{{ product.name }}</h5>
+
+                    <p class="card-text">
+                        GTIN: <span class="font-monospace">{{ product.gtin }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-8 col-lg-9">
+            <h2>BMEcat</h2>
+
+            <pre class="mb-0"><code class="language-xml">{% apply escape %}{% include '@PlaygroundDumperPortal/products/detail/bmecat.xml.twig' %}{% endapply %}</code></pre>
+        </div>
+    </div>
+{% endblock %}

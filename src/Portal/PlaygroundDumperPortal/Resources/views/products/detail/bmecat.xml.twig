@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BMECAT version="2005" xmlns="http://www.bmecat.org/bmecat/2005">
+    <HEADER>
+        <CATALOG>
+            <LANGUAGE>eng</LANGUAGE>
+            <CATALOG_ID>AmiiboAPI</CATALOG_ID>
+            <CATALOG_VERSION>1.0</CATALOG_VERSION>
+            <DATETIME type="generation">
+                <DATE>{{ product.updatedAt|date('Y-m-d') }}</DATE>
+                <TIME>{{ product.updatedAt|date('H:i:s') }}</TIME>
+            </DATETIME>
+        </CATALOG>
+        <SUPPLIER>
+            <SUPPLIER_NAME>Amiibo</SUPPLIER_NAME>
+        </SUPPLIER>
+    </HEADER>
+    <T_NEW_CATALOG>
+        <PRODUCT>
+            <SUPPLIER_PID>{{ product.number }}</SUPPLIER_PID>
+            <PRODUCT_DETAILS>
+                <DESCRIPTION_SHORT>{{ product.name }}</DESCRIPTION_SHORT>
+                <EAN>{{ product.gtin }}</EAN>
+                <BUYER_PID>{{ product.gtin }}</BUYER_PID>
+                <MANUFACTURER_PID>{{ product.gtin }}</MANUFACTURER_PID>
+                <MANUFACTURER_IDREF>{{ product.gtin }}</MANUFACTURER_IDREF>
+            </PRODUCT_DETAILS>
+            <PRODUCT_ORDER_DETAILS>
+                <ORDER_UNIT>C62</ORDER_UNIT>
+                <CONTENT_UNIT>C62</CONTENT_UNIT>
+                <NO_CU_PER_OU>1</NO_CU_PER_OU>
+            </PRODUCT_ORDER_DETAILS>
+            <PRODUCT_PRICE_DETAILS>
+                <PRODUCT_PRICE price_type="net_list">
+                    <PRICE_AMOUNT>{{ product.price|number_format(2) }}</PRICE_AMOUNT>
+                    <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
+                    <LOWER_BOUND>0</LOWER_BOUND>
+                    <TAX>
+                        <TAX_TYPE>VAT</TAX_TYPE>
+                        <TAX_RATE>19</TAX_RATE>
+                    </TAX>
+                </PRODUCT_PRICE>
+            </PRODUCT_PRICE_DETAILS>
+            <MIME_INFO>
+{% for image in product.images %}
+                <MIME>
+                    <MIME_TYPE>{{ image.mimeType }}</MIME_TYPE>
+                    <MIME_SOURCE>{{ image.publicUrl }}</MIME_SOURCE>
+                </MIME>
+{% endfor %}
+            </MIME_INFO>
+        </PRODUCT>
+    </T_NEW_CATALOG>
+</BMECAT>

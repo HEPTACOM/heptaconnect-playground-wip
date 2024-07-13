@@ -48,6 +48,7 @@
         "heptacom/heptaconnect-bridge-shopware-platform": "^0.9.8",
         "heptacom/heptaconnect-core": "^0.9",
         "heptacom/heptaconnect-dataset-base": "^0.9",
+        "heptacom/heptaconnect-package-web-frontend": "^1.0",
         "heptacom/heptaconnect-portal-base": "^0.9",
         "heptacom/heptaconnect-storage-base": "^0.9",
         "heptacom/heptaconnect-storage-shopware-dal": "^0.9",
