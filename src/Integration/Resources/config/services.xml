@@ -27,6 +27,10 @@
             <argument type="string">%env(string:APP_URL)%</argument>
         </service>
 
+        <service id="HeptaConnect\Production\Integration\Command\TransferCommand">
+            <tag name="console.command"/>
+        </service>
+
         <service id="HeptaConnect\Production\Integration\Controller\HomeController">
             <argument type="string">%kernel.heptaconnect_version%</argument>
         </service>
