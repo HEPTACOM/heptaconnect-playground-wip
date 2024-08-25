@@ -22,40 +22,71 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Products</h2>
+    <div class="d-flex justify-content-between border-bottom pb-2">
+        <a class="btn btn-primary" href="/">
+            <i class="bi bi-house-fill"></i>
+            Home
+        </a>
 
-    <div class="row">
+        <form action="{{ path('reset_action') }}" method="post">
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash-fill"></i>
+                Delete all products
+            </button>
+        </form>
+    </div>
 
-        {% for product in page.products %}
-            {% set image = product.images[0] %}
+    {% if page.products|length > 0 %}
+        <h2>Products</h2>
 
-            <div class="col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-4">
-                <div class="card h-100 border-0">
-                    <img src="{{ image.publicUrl }}"
-                         alt="{{ image.filename }}"
-                         style="max-height: 350px"
-                         class="card-img-top flex-grow-1 p-2 object-fit-contain bg-gradient-custom">
+        <div class="row">
+            {% for product in page.products %}
+                {% set image = product.images[0] %}
 
-                    <div class="card-footer bg-body border border-top-0">
-                        <h5 class="card-title">{{ product.name }}</h5>
+                <div class="col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-4">
+                    <div class="card h-100 border-0">
+                        <img src="{{ image.publicUrl }}"
+                             alt="{{ image.filename }}"
+                             style="max-height: 350px"
+                             class="card-img-top flex-grow-1 p-2 object-fit-contain bg-gradient-custom">
 
-                        <p class="card-text">
-                            GTIN:
-                            <span class="font-monospace">{{ product.gtin }}</span>
-                        </p>
+                        <div class="card-footer bg-body border border-top-0">
+                            <h5 class="card-title">{{ product.name }}</h5>
 
-                        <a href="{{ path('product/detail', {number: product.number}) }}"
-                           class="btn btn-primary position-relative w-100">
-                            Details
+                            <p class="card-text">
+                                GTIN:
+                                <span class="font-monospace">{{ product.gtin }}</span>
+                            </p>
 
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <a href="{{ path('product/detail', {number: product.number}) }}"
+                               class="btn btn-primary position-relative w-100">
+                                Details
+
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 {{ product.price|format_currency('EUR', {}, 'de') }}
                             </span>
-                        </a>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="align-items-center container d-flex flex-grow-1 mt-5">
+            <div class="w-100 row">
+                <div class="col-12">
+                    <div class="bg-body-tertiary border p-5 rounded-5 text-center">
+                        <i class="bi bi-boxes" style="font-size: 8rem"></i>
+
+                        <p class="col-lg-8 mx-auto fs-5 text-muted">
+                            There are no products, yet.<br>
+                            <a href="/">Go back</a> and start the exploration for the AmiiboAPI portal.<br>
+                            Then run this command:<br>
+                            <code>bin/console messenger:consume</code>
+                        </p>
                     </div>
                 </div>
             </div>
-        {% endfor %}
-
-    </div>
+        </div>
+    {% endif %}
 {% endblock %}
