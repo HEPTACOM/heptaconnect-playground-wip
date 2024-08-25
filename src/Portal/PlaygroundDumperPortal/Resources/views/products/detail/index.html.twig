@@ -54,16 +54,17 @@
         <div class="col-12 col-md-4 col-lg-3 mb-4">
             <h2>Product: {{ product.name }}</h2>
 
-            <div class="card position-relative" style="max-width: 320px;">
+            <div class="card border-0 position-relative" style="max-width: 320px;">
                 <img src="{{ image.publicUrl }}"
                      alt="{{ image.filename }}"
+                     style="max-height: 350px"
                      class="card-img-top flex-grow-1 p-2 object-fit-contain bg-gradient-custom">
 
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ product.price|format_currency('EUR') }}
+                    {{ product.price|format_currency('EUR', {}, 'de') }}
                 </span>
 
-                <div class="card-footer bg-body border-0">
+                <div class="card-footer bg-body border border-top-0">
                     <h5 class="card-title">{{ product.name }}</h5>
 
                     <p class="card-text">
