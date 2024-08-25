@@ -16,7 +16,7 @@ final class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/")
+     * @Route("/", name="ui.heptaconnect.home")
      */
     public function __invoke(): Response
     {

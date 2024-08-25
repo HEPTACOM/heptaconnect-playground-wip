@@ -14,21 +14,39 @@
 
 <body class="align-items-center d-flex flex-column vh-100">
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="toast align-items-center text-bg-{{ label }} border-0">
+                <div class="d-flex">
+                    <div class="toast-body">{{ message }}</div>
+                    <button class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
 <div class="align-items-center container d-flex flex-grow-1">
-    <div class="bg-body-tertiary border p-5 rounded-5 text-center w-100">
-        <img src="/heptaconnect-logo.png" class="mb-3" style="width: 60px" alt="HEPTAconnect Logo">
+    <div class="w-100 row">
+        <div class="col-12">
+            <div class="bg-body-tertiary border p-5 rounded-5 text-center">
+                <img src="/heptaconnect-logo.png" class="mb-3" style="width: 60px" alt="HEPTAconnect Logo">
 
-        <h1 class="text-body-emphasis">HEPTAconnect</h1>
+                <h1 class="text-body-emphasis">HEPTAconnect Playground</h1>
 
-        <p class="col-lg-8 mx-auto fs-5 text-muted">
-            Your new integration project is ready to go.<br>
-            Start by adding a portal and configuring a portal node.
-        </p>
+                <p class="col-lg-8 mx-auto fs-5 text-muted">
+                    Your new playground project is ready to go.<br>
+                    Inspect the available portals and start an exploration.
+                </p>
 
-        <div class="d-inline-flex gap-2">
-            <a href="https://www.heptaconnect.io/" target="_blank" class="btn btn-primary px-5">
-                Read the Documentation
-            </a>
+                <div class="d-inline-flex gap-2">
+                    <a href="https://www.heptaconnect.io/" target="_blank" class="btn btn-primary px-5">
+                        Read the Documentation
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -38,6 +56,22 @@
         HEPTAconnect v{{ version }} (PHP v{{ constant('PHP_VERSION') }})
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+        nonce="{{ app.request.attributes.get('_cspNonce') }}"></script>
+
+<script type="application/javascript" nonce="{{ app.request.attributes.get('_cspNonce') }}">
+    (function () {
+        'use strict';
+
+        Array.prototype.forEach.call(
+            document.getElementsByClassName('toast'),
+            toast => (new bootstrap.Toast(toast)).show()
+        );
+    })();
+</script>
 
 </body>
 </html>
