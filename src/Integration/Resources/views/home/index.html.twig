@@ -48,6 +48,53 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-6">
+            <div class="bg-body-tertiary border p-5 mt-3 rounded-5 text-center">
+                <h3 class="text-body-emphasis">Demo-Portal: AmiiboAPI</h3>
+
+                <p class="mx-auto text-muted">
+                    The portal <code>niemand-online/heptaconnect-portal-amiibo</code> is installed for demonstration
+                    purposes. It connects to <a href="https://amiiboapi.com/" target="_blank">https://amiiboapi.com/</a>
+                    and reads its items as products.
+                </p>
+
+                <div class="d-inline-flex gap-2">
+                    {% set href = path('api.heptaconnect.exploration', {
+                        portalNodeId: 'amiibo',
+                        entityType: 'Heptacom\\HeptaConnect\\Dataset\\Ecommerce\\Product\\Product'
+                    }) %}
+
+                    <a href="{{ href }}" class="btn btn-primary px-5">
+                        Start exploration
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="bg-body-tertiary border p-5 mt-3 rounded-5 text-center">
+                <h3 class="text-body-emphasis">Demo-Portal: Dumper</h3>
+
+                <p class="mx-auto text-muted">
+                    A local portal implementation to showcase some features of HEPTAconnect.
+                    This portal will receive product entities and store them in the portal-storage.
+                    You can list the dumped products in the browser.
+                </p>
+
+                <div class="d-inline-flex gap-2">
+                    {% set href = path('api.heptaconnect.http.handler', {
+                        portalNodeId: 'dumper',
+                        path: 'products/list'
+                    }) %}
+
+                    <a href="{{ href }}"
+                       class="btn btn-primary px-5">
+                        List of dumped products
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
