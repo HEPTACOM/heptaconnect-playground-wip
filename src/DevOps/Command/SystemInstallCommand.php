@@ -7,7 +7,6 @@ namespace HeptaConnect\Production\DevOps\Command;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDO\Exception;
 use Doctrine\DBAL\Exception\ConnectionException;
-use Shopware\Core\Framework\Adapter\Console\ShopwareStyle;
 use Shopware\Core\Maintenance\System\Service\DatabaseConnectionFactory;
 use Shopware\Core\Maintenance\System\Service\SetupDatabaseAdapter;
 use Shopware\Core\Maintenance\System\Struct\DatabaseConnectionInformation;
@@ -29,9 +28,9 @@ final class SystemInstallCommand extends Command
     protected static $defaultName = 'system:install';
 
     public function __construct(
-        private string $projectDir,
-        private SetupDatabaseAdapter $setupDatabaseAdapter,
-        private EventDispatcherInterface $dispatcher,
+        private readonly string $projectDir,
+        private readonly SetupDatabaseAdapter $setupDatabaseAdapter,
+        private readonly EventDispatcherInterface $dispatcher,
     ) {
         parent::__construct();
     }
@@ -47,7 +46,7 @@ final class SystemInstallCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output = new ShopwareStyle($input, $output);
+        $output = new SymfonyStyle($input, $output);
 
         // set default
         $_ENV['BLUE_GREEN_DEPLOYMENT'] = $_SERVER['BLUE_GREEN_DEPLOYMENT'] = 0;
@@ -152,7 +151,7 @@ final class SystemInstallCommand extends Command
         return self::SUCCESS;
     }
 
-    private function initializeDatabase(ShopwareStyle $output, InputInterface $input): void
+    private function initializeDatabase(SymfonyStyle $output, InputInterface $input): void
     {
         $databaseConnectionInformation = DatabaseConnectionInformation::fromEnv();
 

@@ -12,7 +12,7 @@ composer create-project heptaconnect/playground
 ```
 
 Configure the document root directory (`/public`) to be hosted by a webserver under a dedicated hostname.
-If you are using macOS, we recommend [Laravel Herd](https://herd.laravel.com).
+For your local environment, we recommend [Laravel Herd](https://herd.laravel.com).
 
 ✅ That's it. The system installation is complete.
 
